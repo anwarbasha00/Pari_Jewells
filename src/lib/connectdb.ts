@@ -13,6 +13,7 @@ if (!cached) {
 
 export const connectDB = async () => {
   if (cached.conn) {
+    console.log("DB connected from cache..")
     return cached.conn;
   }
 
@@ -24,10 +25,13 @@ export const connectDB = async () => {
 
   try {
     cached.conn = await cached.promise;
+    console.log("DB connected..")
   } catch (error) {
-    cached.promise = null;
-    throw error;
-  }
+  console.error("MongoDB Error:", error);
+  cached.promise = null;
+  throw error;
+}
 
   return cached.conn;
 };
+

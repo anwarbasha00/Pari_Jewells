@@ -9,6 +9,8 @@ import {
   FiClock,
   FiTruck,
   FiSearch,
+  FiXCircle,
+  FiPackage,
 } from "react-icons/fi";
 
 interface PageProps {
@@ -72,29 +74,35 @@ export default async function Page({
 
   const sortOption =
     sort === "oldest"
-      ? { createdAt: 1 }
-      : { createdAt: -1 };
+      ? { createdAt: 1 as const}
+      : { createdAt: -1 as const };
 
   const orders = await Order.find(query)
     .sort(sortOption)
     .lean();
 
   // Dashboard Stats
-  const allOrders = await Order.find().lean();
+  const totalOrders = orders.length;
 
-  const totalOrders = allOrders.length;
+const pendingOrders = orders.filter(
+  (order: any) => order.status === "Pending"
+).length;
 
-  const pendingOrders = allOrders.filter(
-    (order: any) => order.status === "Pending"
-  ).length;
+const packedOrders = orders.filter(
+  (order: any) => order.status === "Packed"
+).length;
 
-  const shippedOrders = allOrders.filter(
-    (order: any) => order.status === "Shipped"
-  ).length;
+const shippedOrders = orders.filter(
+  (order: any) => order.status === "Shipped"
+).length;
 
-  const deliveredOrders = allOrders.filter(
-    (order: any) => order.status === "Delivered"
-  ).length;
+const deliveredOrders = orders.filter(
+  (order: any) => order.status === "Delivered"
+).length;
+
+const cancelledOrders = orders.filter(
+  (order: any) => order.status === "Cancelled"
+).length;
 
   return (
     <>
@@ -124,7 +132,7 @@ export default async function Page({
 
         {/* ================= STATS ================= */}
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-5">
 
           {/* Total */}
 
@@ -184,6 +192,8 @@ export default async function Page({
 
           </div>
 
+          {/* Packed */}
+
           {/* Shipped */}
 
           <div className="rounded-2xl border border-[#F0C8CF] bg-white p-6 shadow-sm">
@@ -242,6 +252,37 @@ export default async function Page({
             </div>
 
           </div>
+
+          {/* Cancelled */}
+
+<div className="rounded-2xl border border-[#F0C8CF] bg-white p-6 shadow-sm">
+
+  <div className="flex items-center justify-between">
+
+    <div>
+
+      <p className="text-sm text-[#A69A9A]">
+        Cancelled
+      </p>
+
+      <h2 className="mt-2 text-3xl font-bold text-[#3D2430]">
+        {cancelledOrders}
+      </h2>
+
+    </div>
+
+    <div className="rounded-xl bg-red-100 p-3">
+
+      <FiXCircle
+        size={28}
+        className="text-red-600"
+      />
+
+    </div>
+
+  </div>
+
+</div>
 
         </div>
                 {/* ================= FILTER BAR ================= */}

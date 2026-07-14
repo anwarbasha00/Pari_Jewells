@@ -25,7 +25,6 @@ export async function PATCH(
     );
     const discount = Number(formData.get("discount"));
     const stock = Number(formData.get("stock"));
-    console.log("Received stock:", stock);
     const category = formData.get("category") as string;
 
     const keywords = (formData.get("keywords") as string)
@@ -99,11 +98,9 @@ export async function PATCH(
     product.bestSeller = bestSeller;
     product.newArrival = newArrival;
 
-    console.log("Before Save:", product.stock);
     
     await product.save();
 
-    console.log("After Save:", product.stock);
 
     return NextResponse.json(
       {

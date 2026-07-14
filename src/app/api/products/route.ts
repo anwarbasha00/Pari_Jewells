@@ -55,7 +55,6 @@ export async function POST(request: NextRequest) {//add to data base...
 });
 
     const uploadedImage = await uploadCloudinary(image);
-    console.log(uploadedImage);
     const product = await Product.create({
       name,
       description,

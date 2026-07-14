@@ -20,7 +20,6 @@ const page = () => {
     try {
         const result = await axios.post('/api/auth/register',{name,email,password})
         router.push('/login')
-        console.log(result)
 
     } catch (error) {
         console.log(error)

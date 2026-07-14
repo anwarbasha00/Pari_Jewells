@@ -77,7 +77,6 @@ const handleAddToCart = async () => {
       productId: product._id,
       quantity,
     });
-console.log("POST Response:", response.data.cart.items);
     if (response.data.success) {
       // Update Zustand from MongoDB response
       setCart(response.data.cart.items);

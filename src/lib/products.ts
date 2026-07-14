@@ -57,8 +57,6 @@ export async function getProducts({
   }
 
   // Debug Logs
-  console.log("Category:", category);
-  console.log("Query:", query);
 
   let productsQuery = Product.find(query);
 
@@ -78,7 +76,6 @@ export async function getProducts({
 
   const products = await productsQuery.lean();
 
-  console.log("Products Found:", products.length);
 
   return products;
 }

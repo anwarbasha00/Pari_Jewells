@@ -24,7 +24,6 @@ export default function CartItem({
   action: "increase",
 });
 
-console.log("PATCH Response:", res.data.cart.items);
 
 setCart(res.data.cart.items);
     } catch (error) {
@@ -39,7 +38,6 @@ setCart(res.data.cart.items);
         productId: item.productId,
         action: "decrease",
       });
-console.log("PATCH Response:", res.data.cart.items);
       setCart(res.data.cart.items);
     } catch (error) {
       console.error(error);
@@ -54,13 +52,11 @@ console.log("PATCH Response:", res.data.cart.items);
           productId: item.productId,
         },
       });
-console.log("DELETE Response:", res.data.cart.items);
       setCart(res.data.cart.items);
     } catch (error) {
       console.error(error);
     }
   };
-console.log("Cart Item:", item);
   return (
     <div className="flex items-center gap-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
 

@@ -26,7 +26,9 @@ const companyLinks = [
   { name: "About Us", href: "/about" },
   { name: "Privacy Policy", href: "/privacy-policy" },
   { name: "Terms & Conditions", href: "/terms-and-conditions" },
-  { name: "Refund Policy", href: "/refund-policy" },
+  { name: "shipping-policy", href: "/shipping-policy" },
+
+  { name: "cancellation-refund-policy", href: "/cancellation-refund-policy" },
 ];
 
 export default function Footer() {

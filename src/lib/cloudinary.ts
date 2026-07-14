@@ -13,11 +13,7 @@ interface CloudinaryUploadResult {
 }
 export const uploadCloudinary = async (file: Blob | null) => {
   try {
-    console.log({
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-      api_key: process.env.CLOUDINARY_API_KEY,
-      api_secret_exists: !!process.env.CLOUDINARY_API_SECRET,
-    });
+ 
     if (!file) throw new Error("file is missing")
     const bytes = await file?.arrayBuffer()
     const buffer = Buffer.from(bytes)

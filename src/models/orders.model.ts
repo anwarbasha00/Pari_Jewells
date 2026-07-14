@@ -38,12 +38,17 @@ interface Order {
 
   total: number;
 
-  status:
-    | "Pending"
-    | "Confirmed"
-    | "Shipped"
-    | "Delivered"
-    | "Cancelled";
+status:
+  | "Pending"
+  | "Confirmed"
+  | "Packed"
+  | "Shipped"
+  | "Delivered"
+  | "Cancelled";
+
+cancelledAt?: Date;
+
+cancelReason?: string;
 }
 
 const orderSchema = new Schema<Order>(
@@ -157,16 +162,25 @@ razorpaySignature: {
     },
 
     status: {
-      type: String,
-      enum: [
-        "Pending",
-        "Confirmed",
-        "Shipped",
-        "Delivered",
-        "Cancelled",
-      ],
-      default: "Pending",
-    },
+  type: String,
+  enum: [
+    "Pending",
+    "Confirmed",
+    "Packed",
+    "Shipped",
+    "Delivered",
+    "Cancelled",
+  ],
+  default: "Pending",
+},
+
+cancelledAt: {
+  type: Date,
+},
+
+cancelReason: {
+  type: String,
+},
   },
   {
     timestamps: true,

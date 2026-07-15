@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import React from "react";
 import Link from "next/link";
 import {
@@ -16,6 +17,7 @@ import Order from "@/src/models/orders.model";
 import Navbar from "../ammu/layout/Navbar";
 
 export default  async function Page() {
+  await connectDB()
   const hour = new Date().getHours();
 
   let greeting = "Good Evening";
@@ -88,7 +90,7 @@ const recentOrders = await Order.find()
 
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
 
-            <div className="rounded-2xl border border-[#F0C8CF] bg-white p-6 shadow-sm">
+            <div className="rounded-2xl borader border-[#F0C8CF] bg-white p-6 shadow-sm">
               <div className="flex items-center justify-between">
 
                 <div>

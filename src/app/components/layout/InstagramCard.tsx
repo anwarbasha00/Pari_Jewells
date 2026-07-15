@@ -2,11 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { FaInstagram } from "react-icons/fa6";
+import { StaticImageData } from "next/image";
+
 interface InstagramCardProps {
-  image: string;
+  image: string | StaticImageData;
   postUrl: string;
 }
-
 export default function InstagramCard({
   image,
   postUrl,

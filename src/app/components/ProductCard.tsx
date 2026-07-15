@@ -9,11 +9,14 @@ interface ProductCardProps {
     name: string;
     category: string;
     price: number;
-    originalPrice: number;
-    discount: number;
+
+    originalPrice?: number;
+    discount?: number;
+
     images: {
       url: string;
     }[];
+
     featured?: boolean;
     bestseller?: boolean;
     newArrival?: boolean;
@@ -164,27 +167,30 @@ export default function ProductCard({
             ₹{product.price}
           </span>
 
-          {product.originalPrice > product.price && (
-            <>
-              <span className="text-sm text-gray-400 line-through">
-                ₹{product.originalPrice}
-              </span>
+          {product.originalPrice &&
+  product.originalPrice > product.price && (
+    <>
+      <span className="text-sm text-gray-400 line-through">
+        ₹{product.originalPrice}
+      </span>
 
-              <span
-                className="
-                rounded-full
-                bg-[#FFE8EC]
-                px-2
-                py-1
-                text-[11px]
-                font-semibold
-                text-[#E02C69]
-              "
-              >
-                {product.discount}% OFF
-              </span>
-            </>
-          )}
+      {product.discount && (
+        <span
+          className="
+            rounded-full
+            bg-[#FFE8EC]
+            px-2
+            py-1
+            text-[11px]
+            font-semibold
+            text-[#E02C69]
+          "
+        >
+          {product.discount}% OFF
+        </span>
+      )}
+    </>
+)}
 
         </div>
 

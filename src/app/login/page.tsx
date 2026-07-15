@@ -1,5 +1,5 @@
 'use client'
-
+import { Suspense } from "react";
 import axios from 'axios'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -9,7 +9,7 @@ import Button from '../components/Button'
 import Image from 'next/image'
 import logo from '../public/images/pari_logo.jpeg'
 import { useSearchParams } from "next/navigation";
-const page = () => {
+function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -172,4 +172,16 @@ const callbackUrl =
 );
 }
 
-export default page
+export default function Page() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <LoginForm />
+    </Suspense>
+  );
+}

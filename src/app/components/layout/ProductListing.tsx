@@ -4,19 +4,28 @@ import ProductCard from "../ProductCard";
 interface ProductImage {
   url: string;
 }
-
-interface ProductCategory {
-  _id: string;
-  name: string;
-}
-
 export interface Product {
   _id: string;
+
   name: string;
+
   slug: string;
+
   price: number;
+
+  originalPrice: number;
+
+  discount: number;
+
   images: ProductImage[];
-  category: ProductCategory;
+
+  category: string;
+
+  featured?: boolean;
+
+  bestSeller?: boolean;
+
+  newArrival?: boolean;
 }
 
 interface ProductListingProps {

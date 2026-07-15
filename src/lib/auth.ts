@@ -27,15 +27,27 @@ const authOptions:NextAuthOptions = {
 
                 await connectDB()
 
-                let user = await User.findOne({email})
-                if(!user){
-                    throw new Error("No user found with this email!...")
-                }
+                const user = await User.findOne({ email });
 
-                let isPasswordvalid = await bcrypt.compare(password,user.password)
-                if(!isPasswordvalid){
-                    throw new Error("Invalid Password!...")
-                }
+if (!user) {
+  throw new Error("No user found with this email!");
+}
+
+// User registered with Google (no password stored)
+if (!user.password) {
+  throw new Error(
+    "This account was created using Google. Please sign in with Google."
+  );
+}
+
+const isPasswordValid = await bcrypt.compare(
+  password,
+  user.password
+);
+
+if (!isPasswordValid) {
+  throw new Error("Invalid password!");
+}
                 
                 return{
                     id: user._id,
@@ -62,7 +74,7 @@ const authOptions:NextAuthOptions = {
                 let isExistUser = await User.findOne({email:user?.email})
                 
                 if(!isExistUser){
-                   let isExistUser = await User.create({
+                   isExistUser = await User.create({
                     name:user?.name,
                     email:user?.email,
                    })

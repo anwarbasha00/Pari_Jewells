@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ClientProvider from "@/ClientProvider";
+import ScrollToTop from "./components/ScrollToTop.tsx/page";
 
 export const metadata: Metadata = {
   title: "Pari Jewelles",
@@ -18,6 +19,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ClientProvider>
+          <ScrollToTop />
           {children}
         </ClientProvider>
       

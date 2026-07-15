@@ -1,26 +1,22 @@
+export const dynamic = "force-dynamic";
 import { notFound } from "next/navigation";
 
 import Navbar from "../../layout/Navbar";
 import Footer from "@/src/app/components/layout/Footer";
 import OrderDetails from "@/src/app/components/ammu/OrderDetails";
-
+import { connectDB } from "@/src/lib/connectdb";
+import Order from "@/src/models/orders.model";
 async function getOrder(id: string) {
-  const res = await fetch(
-    `http://localhost:3000/api/orders/${id}`,
-    {
-      cache: "no-store",
-    }
-  );
+  await connectDB();
 
-  if (!res.ok) {
+  const order = await Order.findById(id).lean();
+
+  if (!order) {
     return null;
   }
 
-  const data = await res.json();
-
-  return data.order;
+  return JSON.parse(JSON.stringify(order));
 }
-
 export default async function OrderPage({
   params,
 }: {

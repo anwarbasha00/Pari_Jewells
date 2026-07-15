@@ -4,3 +4,21 @@
     transform: translateX(100%);
   }
 }
+/* Swiper Navigation */
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #e02c69;
+  width: 44px;
+  height: 44px;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.swiper-button-disabled {
+  opacity: 0.3;
+}

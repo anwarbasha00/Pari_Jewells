@@ -1,30 +1,29 @@
+"use client";
+
 import Link from "next/link";
 import ProductCard from "../ProductCard";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
 
 interface ProductImage {
   url: string;
 }
+
 export interface Product {
   _id: string;
-
   name: string;
-
   slug: string;
-
   price: number;
-
   originalPrice: number;
-
   discount: number;
-
   images: ProductImage[];
-
   category: string;
-
   featured?: boolean;
-
   bestSeller?: boolean;
-
   newArrival?: boolean;
 }
 
@@ -53,6 +52,7 @@ export default function ProductListing({
     <section className={`py-20 lg:py-24 ${className}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
+
         <div className="mb-12 text-center">
           {subtitle && (
             <p className="text-sm font-medium uppercase tracking-[0.3em] text-[#E02C69]">
@@ -68,15 +68,38 @@ export default function ProductListing({
         </div>
 
         {/* Products */}
+
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <Swiper
+            modules={[Navigation]}
+            navigation={products.length > 4}
+            grabCursor={true}
+            watchOverflow={true}
+            spaceBetween={24}
+            breakpoints={{
+              0: {
+                slidesPerView: 1.2,
+              },
+              480: {
+                slidesPerView: 2,
+              },
+              768: {
+                slidesPerView: 3,
+              },
+              1024: {
+                slidesPerView: 4,
+              },
+              1536: {
+                slidesPerView: 5,
+              },
+            }}
+          >
             {products.map((product) => (
-              <ProductCard
-                key={product._id}
-                product={product}
-              />
+              <SwiperSlide key={product._id}>
+                <ProductCard product={product} />
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         ) : (
           <div className="rounded-xl border border-dashed border-gray-300 py-16 text-center text-gray-500">
             {emptyMessage}
@@ -84,6 +107,7 @@ export default function ProductListing({
         )}
 
         {/* CTA */}
+
         {showButton && products.length > 0 && (
           <div className="mt-14 flex justify-center">
             <Link

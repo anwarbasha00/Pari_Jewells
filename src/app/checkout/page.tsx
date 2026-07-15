@@ -349,11 +349,9 @@ if (
 
 </div>
 
-          {/* Layout */}
 
           <div className="grid gap-8 lg:grid-cols-[1.7fr_420px]">
 
-            {/* Shipping Form */}
 <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
 
   {/* Header */}
@@ -384,7 +382,7 @@ if (
 </div>
 
             {/* Order Summary */}
-<div className="sticky top-24 h-fit">
+<div className="lg:sticky lg:top-24 h-fit">
 
   <OrderSummary
     items={items}

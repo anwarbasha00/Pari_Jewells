@@ -8,11 +8,12 @@ import { FcGoogle } from 'react-icons/fc'
 import Button from '../components/Button'
 import Image from 'next/image'
 import logo from '../public/images/pari_logo.jpeg'
+import { Eye, EyeOff } from "lucide-react";
 const page = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -108,13 +109,27 @@ const page = () => {
               className="h-10 w-full rounded-xl border border-border px-5 bg-white"
             />
 
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="h-10 w-full rounded-xl border border-border px-5 bg-white"
-            />
+            <div className="relative">
+  <input
+    type={showPassword ? "text" : "password"}
+    placeholder="Password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    className="h-10 w-full rounded-xl border border-border bg-white px-5 pr-12"
+  />
+
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="absolute inset-y-0 right-4 flex items-center text-gray-500 hover:text-[#E02C69] transition-colors"
+  >
+    {showPassword ? (
+      <EyeOff size={20} />
+    ) : (
+      <Eye size={20} />
+    )}
+  </button>
+</div>
 
             <Button className="w-full"
              onClick={handleSubmit}
